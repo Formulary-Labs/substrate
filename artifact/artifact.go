@@ -1,0 +1,87 @@
+// Package artifact provides helpers for loading and working with gemara
+// artifacts. It wraps github.com/gemaraproj/go-gemara to provide a
+// simplified, Formulary-specific interface.
+//
+// All gemara type aliases live here so that Formulary tools import only this
+// package — not go-gemara directly. This insulates tools from upstream API
+// changes.
+package artifact
+
+import (
+	"context"
+	"fmt"
+	"os"
+
+	gemara "github.com/gemaraproj/go-gemara"
+	"github.com/gemaraproj/go-gemara/fetcher"
+)
+
+// Re-export key gemara types so tools can use artifact.ControlCatalog instead
+// of importing go-gemara directly.
+type (
+	ControlCatalog  = gemara.ControlCatalog
+	GuidanceCatalog = gemara.GuidanceCatalog
+	AuditLog        = gemara.AuditLog
+	EvaluationLog   = gemara.EvaluationLog
+	Metadata        = gemara.Metadata
+	ArtifactType    = gemara.ArtifactType
+)
+
+// Re-export the invalid artifact sentinel.
+var InvalidArtifact = gemara.InvalidArtifact //nolint:gochecknoglobals
+
+// LoadControlCatalog loads a gemara ControlCatalog from the given file path.
+// Supports .yaml, .yml, and .json extensions.
+func LoadControlCatalog(path string) (*ControlCatalog, error) {
+	f := &fetcher.File{}
+	catalog, err := gemara.Load[ControlCatalog](context.Background(), f, path)
+	if err != nil {
+		return nil, fmt.Errorf("loading control catalog from %q: %w", path, err)
+	}
+	return catalog, nil
+}
+
+// LoadGuidanceCatalog loads a gemara GuidanceCatalog from the given file path.
+func LoadGuidanceCatalog(path string) (*GuidanceCatalog, error) {
+	f := &fetcher.File{}
+	catalog, err := gemara.Load[GuidanceCatalog](context.Background(), f, path)
+	if err != nil {
+		return nil, fmt.Errorf("loading guidance catalog from %q: %w", path, err)
+	}
+	return catalog, nil
+}
+
+// LoadAuditLog loads a gemara AuditLog from the given file path.
+func LoadAuditLog(path string) (*AuditLog, error) {
+	f := &fetcher.File{}
+	log, err := gemara.Load[AuditLog](context.Background(), f, path)
+	if err != nil {
+		return nil, fmt.Errorf("loading audit log from %q: %w", path, err)
+	}
+	return log, nil
+}
+
+// LoadEvaluationLog loads a gemara EvaluationLog from the given file path.
+func LoadEvaluationLog(path string) (*EvaluationLog, error) {
+	f := &fetcher.File{}
+	log, err := gemara.Load[EvaluationLog](context.Background(), f, path)
+	if err != nil {
+		return nil, fmt.Errorf("loading evaluation log from %q: %w", path, err)
+	}
+	return log, nil
+}
+
+// DetectType reads the metadata.type field from an artifact file to identify
+// its type without a full unmarshal. Useful for routing in tools that accept
+// multiple artifact types.
+func DetectType(path string) (ArtifactType, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return InvalidArtifact, fmt.Errorf("reading artifact at %q: %w", path, err)
+	}
+	t, err := gemara.DetectType(data)
+	if err != nil {
+		return InvalidArtifact, fmt.Errorf("detecting type in %q: %w", path, err)
+	}
+	return t, nil
+}
