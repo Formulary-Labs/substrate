@@ -83,6 +83,40 @@ func Parse() Config {
 	return cfg
 }
 
+// RegisterOn registers standard Formulary flags on an existing FlagSet without
+// calling Parse. Use this when a tool needs to add its own flags before
+// parsing. After all flags are registered, call fs.Parse(os.Args[1:]) and
+// then Finalize to resolve the format string.
+//
+//	stdCfg, fmtStr := flags.RegisterOn(flag.CommandLine)
+//	flag.StringVar(&myFlag, "my-flag", "", "Tool-specific flag")
+//	flag.Parse()
+//	if err := flags.Finalize(stdCfg, *fmtStr); err != nil { ... }
+func RegisterOn(fs *goflag.FlagSet) (*Config, *string) {
+	cfg := &Config{}
+	fmtStr := new(string)
+	*fmtStr = string(format.JSON)
+
+	fs.StringVar(fmtStr, "format", string(format.JSON), "Output format: json (default), yaml, md, csv, html")
+	fs.StringVar(&cfg.Program, "program", "", "Program slug for provenance logging and file resolution")
+	fs.BoolVar(&cfg.DryRun, "dry-run", false, "Print what would be written without writing it")
+	fs.BoolVar(&cfg.Interactive, "interactive", false, "Enable interactive prompts")
+	fs.BoolVar(&cfg.Quiet, "quiet", false, "Suppress progress output")
+	fs.StringVar(&cfg.OutputDir, "output-dir", ".", "Directory for output files")
+	return cfg, fmtStr
+}
+
+// Finalize resolves the format string after Parse has been called on the
+// FlagSet. Must be called after fs.Parse() when using RegisterOn.
+func Finalize(cfg *Config, fmtStr string) error {
+	f, err := format.Parse(fmtStr)
+	if err != nil {
+		return err
+	}
+	cfg.Format = f
+	return nil
+}
+
 // Descriptions returns the flag descriptions for documentation and help output.
 func Descriptions() map[string]string {
 	return map[string]string{

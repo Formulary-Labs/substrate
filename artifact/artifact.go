@@ -25,6 +25,9 @@ type (
 	EvaluationLog   = gemara.EvaluationLog
 	Metadata        = gemara.Metadata
 	ArtifactType    = gemara.ArtifactType
+	MappingDocument = gemara.MappingDocument
+	Mapping         = gemara.Mapping
+	MappingTarget   = gemara.MappingTarget
 )
 
 // Re-export the invalid artifact sentinel.
@@ -69,6 +72,16 @@ func LoadEvaluationLog(path string) (*EvaluationLog, error) {
 		return nil, fmt.Errorf("loading evaluation log from %q: %w", path, err)
 	}
 	return log, nil
+}
+
+// LoadMappingDocument loads a gemara MappingDocument from the given file path.
+func LoadMappingDocument(path string) (*MappingDocument, error) {
+	f := &fetcher.File{}
+	doc, err := gemara.Load[MappingDocument](context.Background(), f, path)
+	if err != nil {
+		return nil, fmt.Errorf("loading mapping document from %q: %w", path, err)
+	}
+	return doc, nil
 }
 
 // DetectType reads the metadata.type field from an artifact file to identify
