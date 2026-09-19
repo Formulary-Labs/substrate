@@ -1,8 +1,6 @@
 # substrate
 
-Core library for Formulary compliance tools.
-
-Every Formulary tool imports `substrate`. No tool imports another tool.
+Every Formulary tool grows on `substrate`. No tool imports another — `substrate` is the only shared dependency. It provides the exit code contract, the standard flags, the provenance writer, and the gemara artifact loaders.
 
 ```bash
 go get github.com/Formulary-Labs/substrate
