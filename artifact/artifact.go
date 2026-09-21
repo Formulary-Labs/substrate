@@ -28,10 +28,34 @@ type (
 	MappingDocument = gemara.MappingDocument
 	Mapping         = gemara.Mapping
 	MappingTarget   = gemara.MappingTarget
+	RiskCatalog           = gemara.RiskCatalog
+	Risk                  = gemara.Risk
+	Severity              = gemara.Severity
+	Policy                = gemara.Policy
+	Control               = gemara.Control
+	Group                 = gemara.Group
+	AssessmentRequirement = gemara.AssessmentRequirement
 )
 
 // Re-export the invalid artifact sentinel.
 var InvalidArtifact = gemara.InvalidArtifact //nolint:gochecknoglobals
+
+// Re-export ArtifactType constants so tools do not import go-gemara directly.
+const (
+	AuditLogArtifact          = gemara.AuditLogArtifact
+	CapabilityCatalogArtifact = gemara.CapabilityCatalogArtifact
+	ControlCatalogArtifact    = gemara.ControlCatalogArtifact
+	EnforcementLogArtifact    = gemara.EnforcementLogArtifact
+	EvaluationLogArtifact     = gemara.EvaluationLogArtifact
+	GuidanceCatalogArtifact   = gemara.GuidanceCatalogArtifact
+	LexiconArtifact           = gemara.LexiconArtifact
+	MappingDocumentArtifact   = gemara.MappingDocumentArtifact
+	PolicyArtifact            = gemara.PolicyArtifact
+	PrincipleCatalogArtifact  = gemara.PrincipleCatalogArtifact
+	RiskCatalogArtifact       = gemara.RiskCatalogArtifact
+	ThreatCatalogArtifact     = gemara.ThreatCatalogArtifact
+	VectorCatalogArtifact     = gemara.VectorCatalogArtifact
+)
 
 // LoadControlCatalog loads a gemara ControlCatalog from the given file path.
 // Supports .yaml, .yml, and .json extensions.
@@ -82,6 +106,28 @@ func LoadMappingDocument(path string) (*MappingDocument, error) {
 		return nil, fmt.Errorf("loading mapping document from %q: %w", path, err)
 	}
 	return doc, nil
+}
+
+// LoadRiskCatalog loads a gemara RiskCatalog from the given file path.
+// Supports .yaml, .yml, and .json extensions.
+func LoadRiskCatalog(path string) (*RiskCatalog, error) {
+	f := &fetcher.File{}
+	catalog, err := gemara.Load[RiskCatalog](context.Background(), f, path)
+	if err != nil {
+		return nil, fmt.Errorf("loading risk catalog from %q: %w", path, err)
+	}
+	return catalog, nil
+}
+
+// LoadPolicy loads a gemara Policy from the given file path.
+// Supports .yaml, .yml, and .json extensions.
+func LoadPolicy(path string) (*Policy, error) {
+	f := &fetcher.File{}
+	policy, err := gemara.Load[Policy](context.Background(), f, path)
+	if err != nil {
+		return nil, fmt.Errorf("loading policy from %q: %w", path, err)
+	}
+	return policy, nil
 }
 
 // DetectType reads the metadata.type field from an artifact file to identify
