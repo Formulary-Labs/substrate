@@ -19,15 +19,17 @@ import (
 // Re-export key gemara types so tools can use artifact.ControlCatalog instead
 // of importing go-gemara directly.
 type (
+	// ControlCatalog re-exports gemara.ControlCatalog for Formulary tools.
 	ControlCatalog  = gemara.ControlCatalog
 	GuidanceCatalog = gemara.GuidanceCatalog
 	AuditLog        = gemara.AuditLog
 	EvaluationLog   = gemara.EvaluationLog
 	Metadata        = gemara.Metadata
+	//nolint:revive // ArtifactType mirrors gemara.ArtifactType; stutter is intentional for clarity
 	ArtifactType    = gemara.ArtifactType
 	MappingDocument = gemara.MappingDocument
-	Mapping         = gemara.Mapping
-	MappingTarget   = gemara.MappingTarget
+	Mapping               = gemara.Mapping
+	MappingTarget         = gemara.MappingTarget
 	RiskCatalog           = gemara.RiskCatalog
 	Risk                  = gemara.Risk
 	Severity              = gemara.Severity
@@ -37,7 +39,7 @@ type (
 	AssessmentRequirement = gemara.AssessmentRequirement
 )
 
-// Re-export the invalid artifact sentinel.
+// InvalidArtifact re-exports the gemara invalid artifact sentinel.
 var InvalidArtifact = gemara.InvalidArtifact //nolint:gochecknoglobals
 
 // Re-export ArtifactType constants so tools do not import go-gemara directly.

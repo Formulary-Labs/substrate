@@ -11,11 +11,11 @@ import (
 // These tests use the real gemara test fixtures from the probe tool's testdata
 // directory, which is the nearest available set of valid gemara artifacts.
 const (
-	testdataDir     = "../../probe/testdata"
-	catalogFixture  = "good-control-catalog.yaml"
-	evalLogFixture  = "good-evaluation-log.yaml"
-	lexiconFixture  = "good-lexicon.yaml"
-	badFixture      = "bad.yaml"
+	testdataDir    = "../../probe/testdata"
+	catalogFixture = "good-control-catalog.yaml"
+	evalLogFixture = "good-evaluation-log.yaml"
+	lexiconFixture = "good-lexicon.yaml"
+	badFixture     = "bad.yaml"
 )
 
 func TestLoadControlCatalog_valid(t *testing.T) {

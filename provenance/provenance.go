@@ -37,11 +37,11 @@ const (
 type QualityGate string
 
 const (
-	Pass              QualityGate = "pass"
+	Pass                QualityGate = "pass"
 	FailedOnceCorrected QualityGate = "failed_once_corrected"
-	Escalated         QualityGate = "escalated"
-	Skipped           QualityGate = "skipped"
-	NotApplicable     QualityGate = "not_applicable"
+	Escalated           QualityGate = "escalated"
+	Skipped             QualityGate = "skipped"
+	NotApplicable       QualityGate = "not_applicable"
 )
 
 // Entry is a single provenance log record.
@@ -90,11 +90,11 @@ func Write(logPath string, e Entry) error {
 		e.Timestamp = time.Now().UTC().Format(time.RFC3339)
 	}
 
-	if err := os.MkdirAll(filepath.Dir(logPath), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Dir(logPath), 0o750); err != nil {
 		return fmt.Errorf("provenance: creating log directory: %w", err)
 	}
 
-	f, err := os.OpenFile(logPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
+	f, err := os.OpenFile(logPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o600)
 	if err != nil {
 		return fmt.Errorf("provenance: opening log file: %w", err)
 	}

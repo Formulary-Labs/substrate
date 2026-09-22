@@ -34,7 +34,7 @@ func TestWrite_creates_file(t *testing.T) {
 	if err != nil {
 		t.Fatalf("could not open log file: %v", err)
 	}
-	defer f.Close()
+	defer f.Close() //nolint:errcheck // test read-only file, close error is harmless
 
 	scanner := bufio.NewScanner(f)
 	var lines []provenance.Entry
@@ -77,8 +77,11 @@ func TestWrite_appends(t *testing.T) {
 		}
 	}
 
-	f, _ := os.Open(logPath)
-	defer f.Close()
+	f, err := os.Open(logPath)
+	if err != nil {
+		t.Fatalf("could not reopen log file: %v", err)
+	}
+	defer f.Close() //nolint:errcheck // test read-only file, close error is harmless
 	var count int
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
