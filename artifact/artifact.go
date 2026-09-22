@@ -29,8 +29,8 @@ type (
 	EvaluationLog = gemara.EvaluationLog
 	// Metadata re-exports gemara.Metadata for Formulary tools.
 	Metadata = gemara.Metadata
-	// ArtifactType re-exports gemara.ArtifactType for Formulary tools. //nolint:revive // stutter is intentional
-	ArtifactType = gemara.ArtifactType
+	// ArtifactType re-exports gemara.ArtifactType for Formulary tools.
+	ArtifactType = gemara.ArtifactType //nolint:revive // stutter is intentional
 	// MappingDocument re-exports gemara.MappingDocument for Formulary tools.
 	MappingDocument = gemara.MappingDocument
 	// Mapping re-exports gemara.Mapping for Formulary tools.
