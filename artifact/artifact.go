@@ -23,20 +23,33 @@ type (
 	ControlCatalog = gemara.ControlCatalog
 	// GuidanceCatalog re-exports gemara.GuidanceCatalog for Formulary tools.
 	GuidanceCatalog = gemara.GuidanceCatalog
-	AuditLog        = gemara.AuditLog
-	EvaluationLog   = gemara.EvaluationLog
-	Metadata        = gemara.Metadata
-	//nolint:revive // ArtifactType mirrors gemara.ArtifactType; stutter is intentional for clarity
-	ArtifactType    = gemara.ArtifactType
+	// AuditLog re-exports gemara.AuditLog for Formulary tools.
+	AuditLog = gemara.AuditLog
+	// EvaluationLog re-exports gemara.EvaluationLog for Formulary tools.
+	EvaluationLog = gemara.EvaluationLog
+	// Metadata re-exports gemara.Metadata for Formulary tools.
+	Metadata = gemara.Metadata
+	// ArtifactType re-exports gemara.ArtifactType for Formulary tools. //nolint:revive // stutter is intentional
+	ArtifactType = gemara.ArtifactType
+	// MappingDocument re-exports gemara.MappingDocument for Formulary tools.
 	MappingDocument = gemara.MappingDocument
-	Mapping               = gemara.Mapping
-	MappingTarget         = gemara.MappingTarget
-	RiskCatalog           = gemara.RiskCatalog
-	Risk                  = gemara.Risk
-	Severity              = gemara.Severity
-	Policy                = gemara.Policy
-	Control               = gemara.Control
-	Group                 = gemara.Group
+	// Mapping re-exports gemara.Mapping for Formulary tools.
+	Mapping = gemara.Mapping
+	// MappingTarget re-exports gemara.MappingTarget for Formulary tools.
+	MappingTarget = gemara.MappingTarget
+	// RiskCatalog re-exports gemara.RiskCatalog for Formulary tools.
+	RiskCatalog = gemara.RiskCatalog
+	// Risk re-exports gemara.Risk for Formulary tools.
+	Risk = gemara.Risk
+	// Severity re-exports gemara.Severity for Formulary tools.
+	Severity = gemara.Severity
+	// Policy re-exports gemara.Policy for Formulary tools.
+	Policy = gemara.Policy
+	// Control re-exports gemara.Control for Formulary tools.
+	Control = gemara.Control
+	// Group re-exports gemara.Group for Formulary tools.
+	Group = gemara.Group
+	// AssessmentRequirement re-exports gemara.AssessmentRequirement for Formulary tools.
 	AssessmentRequirement = gemara.AssessmentRequirement
 )
 
