@@ -20,7 +20,8 @@ import (
 // of importing go-gemara directly.
 type (
 	// ControlCatalog re-exports gemara.ControlCatalog for Formulary tools.
-	ControlCatalog  = gemara.ControlCatalog
+	ControlCatalog = gemara.ControlCatalog
+	// GuidanceCatalog re-exports gemara.GuidanceCatalog for Formulary tools.
 	GuidanceCatalog = gemara.GuidanceCatalog
 	AuditLog        = gemara.AuditLog
 	EvaluationLog   = gemara.EvaluationLog

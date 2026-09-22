@@ -36,6 +36,7 @@ const (
 // QualityGate indicates the quality gate result for the produced artifact.
 type QualityGate string
 
+//nolint:revive // QualityGate constants are self-documenting string identifiers.
 const (
 	Pass                QualityGate = "pass"
 	FailedOnceCorrected QualityGate = "failed_once_corrected"
