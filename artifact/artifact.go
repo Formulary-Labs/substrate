@@ -45,6 +45,12 @@ type (
 	Severity = gemara.Severity
 	// Policy re-exports gemara.Policy for Formulary tools.
 	Policy = gemara.Policy
+	// Scope re-exports gemara.Scope for Formulary tools.
+	Scope = gemara.Scope
+	// RACI re-exports gemara.RACI for Formulary tools.
+	RACI = gemara.RACI
+	// Contact re-exports gemara.Contact for Formulary tools.
+	Contact = gemara.Contact
 	// Control re-exports gemara.Control for Formulary tools.
 	Control = gemara.Control
 	// Group re-exports gemara.Group for Formulary tools.
