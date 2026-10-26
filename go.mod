@@ -3,7 +3,7 @@ module github.com/Formulary-Labs/substrate
 go 1.26.6
 
 require (
-	github.com/gemaraproj/go-gemara v0.10.0
+	github.com/gemaraproj/go-gemara v0.12.0
 	github.com/google/uuid v1.6.0
 )
 
