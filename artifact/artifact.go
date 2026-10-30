@@ -1,10 +1,10 @@
-// Package artifact provides helpers for loading and working with gemara
-// artifacts. It wraps github.com/gemaraproj/go-gemara to provide a
-// simplified, Formulary-specific interface.
+// Package artifact provides helpers for loading and working with compliance
+// artifacts. Gemara files are loaded through github.com/gemaraproj/go-gemara.
+// Native OSCAL files are loaded through github.com/defenseunicorns/go-oscal.
 //
-// All gemara type aliases live here so that Formulary tools import only this
-// package — not go-gemara directly. This insulates tools from upstream API
-// changes.
+// Type aliases live here so that Formulary tools import only this package.
+// This insulates tools from upstream API changes. LoadCatalog accepts either
+// interchange language; the gemara Load* functions are unchanged.
 package artifact
 
 import (

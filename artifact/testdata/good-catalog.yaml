@@ -1,0 +1,23 @@
+catalog:
+  uuid: 8c8e5c3a-6b1d-4e2f-9a10-0b1c2d3e4f50
+  metadata:
+    title: Example Access Control Catalog
+    last-modified: "2026-10-07T12:00:00Z"
+    version: "1.0.0"
+    oscal-version: "1.1.2"
+    document-ids:
+      - scheme: https://formulary.example/framework
+        identifier: nist-800-53
+  groups:
+    - id: ac
+      title: Access Control
+      controls:
+        - id: ac-1
+          title: Policy and Procedures
+          parts:
+            - id: ac-1_smt
+              name: statement
+              prose: Develop, document, and disseminate an access control policy.
+            - id: ac-1_obj
+              name: assessment-objective
+              prose: Access control policy is documented and disseminated.

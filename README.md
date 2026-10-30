@@ -1,10 +1,19 @@
 # substrate
 
-Every Formulary tool grows on `substrate`. No tool imports another — `substrate` is the only shared dependency. It provides the exit code contract, the standard flags, the provenance writer, and the gemara artifact loaders.
+Every Formulary tool grows on `substrate`. No tool imports another — `substrate` is the only shared dependency. It provides the exit code contract, the standard flags, the provenance writer, and the OSCAL and gemara artifact loaders.
 
 ```bash
 go get github.com/Formulary-Labs/substrate
 ```
+
+## In the ecosystem
+
+Formulary is a **pick-and-choose** suite of small, single-purpose CLIs. Install only the tools your workflow needs; each runs standalone. Shared contracts live in [`substrate`](https://github.com/Formulary-Labs/substrate). Optional Make pipelines (or an agent such as `regimen`) compose tools into a run — plug-and-play, not all-or-nothing.
+
+**This library:** shared foundation — exit codes, flags, provenance, OSCAL and gemara loaders. Not a CLI.  
+**Works with:** Every other Formulary module depends on this alone.  
+**Pipeline stage:** foundation.
+
 
 ## Packages
 
@@ -97,7 +106,7 @@ Quality gate constants: `Pass`, `FailedOnceCorrected`, `Escalated`, `Skipped`, `
 
 ### `substrate/artifact`
 
-Gemara artifact loaders. Import `artifact` instead of `go-gemara` directly so tools never duplicate the detection and loading logic.
+OSCAL and gemara artifact loaders. Import `artifact` instead of `go-oscal` or `go-gemara` directly so tools never duplicate format detection and loading. `LoadCatalog` accepts either language. `DetectFormat` reports which one a file is. Gemara `Load*` functions are unchanged.
 
 ```go
 import "github.com/Formulary-Labs/substrate/artifact"
