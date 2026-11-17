@@ -1,6 +1,6 @@
 module github.com/Formulary-Labs/substrate
 
-go 1.26.6
+go 1.26.11
 
 require (
 	github.com/gemaraproj/go-gemara v0.10.0
