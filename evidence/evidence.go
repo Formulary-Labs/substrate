@@ -15,8 +15,6 @@ var linkPatterns = []struct {
 	{"GitHub", []string{"github.com"}},
 	{"GitLab", []string{"gitlab"}},
 	{"Google Doc", []string{"docs.google.com"}},
-	{"Red Hat Docs", []string{"access.redhat.com", "docs.redhat.com"}},
-	{"Red Hat", []string{"redhat.com"}},
 	{"Miro", []string{"miro.com"}},
 	{"ServiceNow", []string{"service-now.com"}},
 	{"Splunk", []string{"splunkcloud.com"}},
@@ -25,7 +23,7 @@ var linkPatterns = []struct {
 
 // ClassifyLink returns (linkType, isPending) for an evidence URL or placeholder.
 // linkType is one of: "Confluence", "Jira", "GitHub", "GitLab", "Google Doc",
-// "Red Hat Docs", "Red Hat", "Miro", "ServiceNow", "Splunk", "Grafana", "Other",
+// "Miro", "ServiceNow", "Splunk", "Grafana", "Other",
 // or "PENDING" when isPending is true.
 // isPending is true when url is empty or starts with "PENDING" (case-insensitive).
 func ClassifyLink(url string) (linkType string, isPending bool) {
